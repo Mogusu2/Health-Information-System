@@ -26,10 +26,10 @@ def get_program_by_name(db: Session, name: str):
     return db.query(models.Program).filter(models.Program.name == name).first()
 
 def enroll_client_in_programs(db: Session, client_id: int, program_ids: list[int]):
-    client = db.query(models.Client).filter(models.Client.id == client_id).first()
+    client = db.query(models.Client).get(client_id)
     for pid in program_ids:
-        program = db.query(models.Program).get(pid)
-        if program and program not in client.programs:
+        program = db.query(models.Program).get(pid) 
+        if program:
             client.programs.append(program)
     db.commit()
     return client

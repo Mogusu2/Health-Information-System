@@ -39,8 +39,8 @@ function EnrollClient() {
 
     try {
       const response = await axios.post('http://127.0.0.1:8000/enroll', {
-        program: selectedProgram,
-        clientId: selectedClient, 
+        program: parseInt(selectedProgram),
+        clientId: parseInt(selectedClient), 
       });
 
       console.log('Client Enrolled:', response.data);
