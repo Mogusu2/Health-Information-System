@@ -37,19 +37,19 @@ A basic health information system for managing clients and health programs/servi
 
 # API Documentation
 ## Client Endpoints
-GET /api/clients - List all clients
+- GET /api/clients - List all clients
 
-POST /api/clients - Create a new client
+- POST /api/clients - Create a new client
 
-GET /api/clients/:id - Get client details
+- GET /api/clients/:id - Get client details
 
-PUT /api/clients/:id - Update client information
+- PUT /api/clients/:id - Update client information
 
-GET /api/clients/search?q=[query] - Search clients
+- GET /api/clients/search?q=[query] - Search clients
 
 ## Program Endpoints
-GET /api/programs - List all programs
+- GET /api/programs - List all programs
 
-POST /api/programs - Create a new program
+- POST /api/programs - Create a new program
 
-POST /api/enrollments - Enroll client in a program
+- POST /api/enrollments - Enroll client in a program
