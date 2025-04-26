@@ -17,7 +17,7 @@ A basic health information system for managing clients and health programs/servi
 - Database: PostgreSQL- Supabase
 - Frontend: React-Vite
 - Testing: pytest
-- Deployment: Render/Heroku/Vercel (choose one)
+
 
 ## Installation
 
@@ -53,3 +53,7 @@ A basic health information system for managing clients and health programs/servi
 - POST /api/programs - Create a new program
 
 - POST /api/enrollments - Enroll client in a program
+
+## Presentation
+
+You can view the project presentation here: [Project Presentation (Canva)](https://www.canva.com/design/DAGlw_ol6FA/jKys4AiqDdrjtjuPA9EpNQ/edit?utm_content=DAGlw_ol6FA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
