@@ -8,26 +8,46 @@ function RegisterClient() {
   const [clientEmail, setClientEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
+    if (!/\S+@\S+\.\S+/.test(clientEmail)) {
+      setError('Please enter a valid email address.');
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post('http://127.0.0.1:8000/clients', {
         name: clientName,
-        age: clientAge,
+        age: parseInt(clientAge, 10),
         contact: clientContact,
+        email: clientEmail,
       });
       console.log('Client Registered:', response.data);
+
+      setShowSuccessModal(true);
+
       
+      setClientName('');
+      setClientAge('');
+      setClientContact('');
+      setClientEmail('');
+
     } catch (err) {
       setError('Error registering client. Please try again later.');
       console.error('API Error:', err);
     } finally {
       setLoading(false);
     }
+  };
+
+  const closeModal = () => {
+    setShowSuccessModal(false);
   };
 
   return (
@@ -74,7 +94,7 @@ function RegisterClient() {
           <div className="mb-3">
             <label htmlFor="clientEmail" className="form-label">Client Email</label>
             <input
-              type="text"
+              type="email"
               id="clientEmail"
               className="form-control"
               value={clientEmail}
@@ -87,6 +107,30 @@ function RegisterClient() {
           </button>
         </form>
       </div>
+
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="modal fade show" style={{ display: 'block' }} tabIndex="-1">
+          <div className="modal-dialog">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Registration Successful</h5>
+                <button type="button" className="btn-close" onClick={closeModal}></button>
+              </div>
+              <div className="modal-body">
+                <p>The client has been registered successfully!</p>
+              </div>
+              <div className="modal-footer">
+                <button type="button" className="btn btn-success" onClick={closeModal}>
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+          {/* backdrop */}
+          <div className="modal-backdrop fade show"></div>
+        </div>
+      )}
     </div>
   );
 }
