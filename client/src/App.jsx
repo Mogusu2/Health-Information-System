@@ -1,35 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
+import CreateProgram from "./pages/CreateProgram";
+import RegisterClient from "./pages/RegisterClient";
+import EnrollClient from "./pages/EnrollClient";
+import SearchClient from "./pages/SearchClient";
+import Profile from "./pages/Profile";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        {/* Wrap everything inside Dashboard */}
+        <Route path="/" element={<Dashboard />}>
+          {/* <Route index element={<h2 className="mt-5">Welcome to the Doctor Dashboard</h2>} /> */}
+          <Route path="create-program" element={<CreateProgram />} />
+          <Route path="register-client" element={<RegisterClient />} />
+          <Route path="enroll-client" element={<EnrollClient />} />
+          <Route path="search-client" element={<SearchClient />} />
+          <Route path="client-profile/:id" element={<Profile />} />
+        </Route>
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
