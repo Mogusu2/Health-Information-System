@@ -1,0 +1,9 @@
+@import "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css";
+
+.dashboard-header {
+  background: linear-gradient(135deg, #e3f2fd, #fce4ec);
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin: 2rem auto;
+  max-width: 900px;
+}
