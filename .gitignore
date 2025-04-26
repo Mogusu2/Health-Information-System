@@ -1,0 +1,37 @@
+# General
+node_modules/
+dist/
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.idea/
+.mypy_cache/
+.pytest_cache/
+
+# Alembic
+alembic/versions/
+
+# Supabase
+supabase/.env.local
+supabase/.supabase
+supabase/.cache
+
+# React/Vite
+*.log
+*.lock
+*.tsbuildinfo
+.DS_Store
+.vscode/
+*.local
+*.swp
+.swp
+.swo
+.history
+
