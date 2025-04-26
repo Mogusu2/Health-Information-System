@@ -1,24 +1,30 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
+import { Alert, Button, Card, CardContent, TextField, Typography } from '@mui/material';
 
 function CreateProgram() {
   const [programName, setProgramName] = useState('');
   const [programDescription, setProgramDescription] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setSuccessMessage('');
 
     try {
-      const response = await axios.post('http://127.0.0.1:8000/programs', {
+      const response = await api.post('/programs', {
         name: programName,
         description: programDescription,
       });
+
       console.log('Program Created:', response.data);
-      
+      setSuccessMessage('Health Program created successfully!');
+      setProgramName('');
+      setProgramDescription('');
     } catch (err) {
       setError('Error creating program. Please try again later.');
       console.error('API Error:', err);
@@ -28,41 +34,47 @@ function CreateProgram() {
   };
 
   return (
-    <div className="card mt-4">
-      <div className="card-header">
-        <h3>Create Health Program</h3>
-      </div>
-      <div className="card-body">
-        {error && <div className="alert alert-danger">{error}</div>}
+    <Card sx={{ maxWidth: 600, margin: '2rem auto', padding: 3 }}>
+      <CardContent>
+        <Typography variant="h5" component="h2" gutterBottom>
+          Create Health Program
+        </Typography>
+
+        {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+        {successMessage && <Alert severity="success" sx={{ mb: 2 }}>{successMessage}</Alert>}
+
         <form onSubmit={handleSubmit}>
-          <div className="mb-3">
-            <label htmlFor="programName" className="form-label">Program Name</label>
-            <input
-              type="text"
-              id="programName"
-              className="form-control"
-              value={programName}
-              onChange={(e) => setProgramName(e.target.value)}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="programDescription" className="form-label">Description</label>
-            <textarea
-              id="programDescription"
-              className="form-control"
-              rows="4"
-              value={programDescription}
-              onChange={(e) => setProgramDescription(e.target.value)}
-              required
-            />
-          </div>
-          <button type="submit" className="btn btn-primary" disabled={loading}>
+          <TextField
+            label="Program Name"
+            fullWidth
+            margin="normal"
+            value={programName}
+            onChange={(e) => setProgramName(e.target.value)}
+            required
+          />
+          <TextField
+            label="Program Description"
+            fullWidth
+            multiline
+            rows={4}
+            margin="normal"
+            value={programDescription}
+            onChange={(e) => setProgramDescription(e.target.value)}
+            required
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            disabled={loading}
+            sx={{ mt: 2 }}
+          >
             {loading ? 'Creating...' : 'Create Program'}
-          </button>
+          </Button>
         </form>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   );
 }
 
